@@ -1,0 +1,87 @@
+@startuml
+
+package Game {
+    interface IInputProvider {
+        GetFrontWheel() : float
+        GetBackWheel() : float
+    }
+}
+package PlayerTricycle {
+    class TricycleStatus <<ScriptableObject>> {
+        RotateSpeed : float
+    }
+    
+    class WheelRotatePresenter <<IInitializable>> {
+        +canInput : bool
+        RegisterRotate() : void
+    }
+    
+    class WheelCalculator {
+        tricycleStatus : TricycleStatus
+        Calculate() : float
+    }
+    
+    interface IWheelRotatable {
+        Rotate(axis : float) : void
+    }
+    
+    class WheelBehaviour {
+        Rotate(axis : float) : void
+    }
+    
+    class TricycleBehaviour {
+        FrontWheel : WheelBehaviour
+        RearWheel : WheelRotatable
+    }
+
+    class MonoBehaviour { }
+    
+    TricycleBehaviour --|> MonoBehaviour
+    WheelBehaviour --|> MonoBehaviour
+
+    WheelBehaviour ..|> IWheelRotatable
+    
+    WheelRotatePresenter ..> IInputProvider
+    WheelRotatePresenter ..> TricycleBehaviour
+    WheelRotatePresenter ..left> WheelCalculator
+    
+    TricycleBehaviour ..> WheelBehaviour
+}
+
+'package Generate {
+'    class GenerateSettings {
+'        aheadCount : int
+'        destroyCount : int
+'        StartStage : Stage 
+'        Stages : Stage[]
+'    }
+'
+'    class Stage {
+'        prefab : GameObject
+'        width : float
+'    }
+'
+'    class CameraPositionMonitor {
+'        OnChanged : IObservable<Vector3>
+'    }
+'
+'    class StageGenerator {
+'    }
+'
+'    class StageDestroyer {
+'    }
+'
+'    class StageContainer {
+'        - stages : List<Stage>
+'        + stageCount : int
+'
+'        AddStage(stage : Stage) : void
+'        GetStage(index : int) : Stage
+'        DeleteFirstStage() : void
+'    }
+'
+'    StageGenerator ..> GenerateSettings
+'    StageGenerator ..> CameraPositionMonitor
+'    StageGenerator --> StageContainer
+'}
+@enduml

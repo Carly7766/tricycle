@@ -1,0 +1,8 @@
+# デフォルトの無視ファイル
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/modules.xml
+/.idea.tricycle.iml
+/projectSettingsUpdater.xml
