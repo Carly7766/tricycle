@@ -202,6 +202,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "dev.kyubuns.akyuiunity": {
+      "version": "https://github.com/kyubuns/AkyuiUnity.git?path=Assets/AkyuiUnity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "3179e9522b14e3b74688f5d6ada1e57bd41a7dc8"
+    },
     "jp.hadashikick.vcontainer": {
       "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.8.0",
       "depth": 0,

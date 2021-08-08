@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dea0939a8874978a5d6de96c563c523, type: 3}
   m_Name: Tricycle Status
   m_EditorClassIdentifier: 
-  rotateSpeed: 6
+  rotateSpeed: 5
