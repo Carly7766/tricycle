@@ -13,8 +13,8 @@ namespace Game
 
         private void Update()
         {
-            _frontWheelSpeed.Value = Input.GetAxis("FrontWheel");
-            _rearWheelSpeed.Value = Input.GetAxis("RearWheel");
+            _frontWheelSpeed.Value = UnityEngine.Input.GetAxis("FrontWheel");
+            _rearWheelSpeed.Value = UnityEngine.Input.GetAxis("RearWheel");
         }
     }
 }
