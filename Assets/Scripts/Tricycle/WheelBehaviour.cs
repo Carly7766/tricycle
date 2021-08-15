@@ -18,6 +18,7 @@ namespace Tricycle
 
         void FixedUpdate()
         {
+            //サスペンションを常に車体と垂直にする
             var suspension = WheelJoint2D.suspension;
             suspension.angle = 90f - transform.localEulerAngles.z + bodyTransform.localEulerAngles.z;
             WheelJoint2D.suspension = suspension;

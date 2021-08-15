@@ -27,8 +27,8 @@ namespace Tricycle
 
         public void SubscribeInput()
         {
-            _inputProvider.FrontWheelSpeed.Subscribe(input => _tricycleBehaviour.FrontWheelRotatable.Rotate(_wheelRotateCalculator.CalculateSpeed(input)));
-            _inputProvider.RearWheelSpeed.Subscribe(input => _tricycleBehaviour.RearWheelRotatable.Rotate(_wheelRotateCalculator.CalculateSpeed(input)));
+            _inputProvider.FrontWheelSpeed.Subscribe(input => _tricycleBehaviour.FrontWheelRotatable.Rotate(_wheelRotateCalculator.CalculateFrontRotateSpeed(input)));
+            _inputProvider.RearWheelSpeed.Subscribe(input => _tricycleBehaviour.RearWheelRotatable.Rotate(_wheelRotateCalculator.CalculateRearRotateSpeed(input)));
         }
     }
 }

@@ -9,9 +9,14 @@ namespace Tricycle
             _tricycleStatus = tricycleStatus;
         }
 
-        public float CalculateSpeed(float input)
+        public float CalculateFrontRotateSpeed(float input)
         {
-            return input * _tricycleStatus.rotateSpeed;
+            return input * _tricycleStatus.frontWheelRotateSpeed;
+        }
+
+        public float CalculateRearRotateSpeed(float input)
+        {
+            return input * _tricycleStatus.frontWheelRotateSpeed;
         }
     }
 }
