@@ -1,10 +1,10 @@
-﻿using System;
+using UniRx;
 
 namespace Input
 {
     public interface IInputProvider
     {
-        IObservable<bool> GetJump();
-        IObservable<float> GetMoveDirection();
+        IReadOnlyReactiveProperty<float> FrontWheelSpeed { get; }
+        IReadOnlyReactiveProperty<float> RearWheelSpeed { get; }
     }
 }

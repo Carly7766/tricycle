@@ -1,7 +1,7 @@
 using UniRx;
 using UnityEngine;
 
-namespace Game
+namespace Input
 {
     public class KeyInputProvider : MonoBehaviour, IInputProvider
     {

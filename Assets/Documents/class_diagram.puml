@@ -1,10 +1,14 @@
 @startuml
 
-package Game {
-    interface IInputProvider {
-        GetFrontWheel() : float
-        GetBackWheel() : float
+package Input {
+    class KeyInputProvider {
     }
+    
+    interface IInputProvider {
+        GetFrontWheel() : ReactiveProperty<float>
+        GetBackWheel() : ReactiveProperty<float>
+    }
+    KeyInputProvider ..|> IInputProvider
 }
 package PlayerTricycle {
     class TricycleStatus <<ScriptableObject>> {
@@ -47,41 +51,9 @@ package PlayerTricycle {
     
     TricycleBehaviour ..> WheelBehaviour
 }
-
-'package Generate {
-'    class GenerateSettings {
-'        aheadCount : int
-'        destroyCount : int
-'        StartStage : Stage 
-'        Stages : Stage[]
-'    }
-'
-'    class Stage {
-'        prefab : GameObject
-'        width : float
-'    }
-'
-'    class CameraPositionMonitor {
-'        OnChanged : IObservable<Vector3>
-'    }
-'
-'    class StageGenerator {
-'    }
-'
-'    class StageDestroyer {
-'    }
-'
-'    class StageContainer {
-'        - stages : List<Stage>
-'        + stageCount : int
-'
-'        AddStage(stage : Stage) : void
-'        GetStage(index : int) : Stage
-'        DeleteFirstStage() : void
-'    }
-'
-'    StageGenerator ..> GenerateSettings
-'    StageGenerator ..> CameraPositionMonitor
-'    StageGenerator --> StageContainer
-'}
+package Game {
+    class RetrySequence {
+    
+    }
+}
 @enduml
