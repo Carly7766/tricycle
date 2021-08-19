@@ -1,4 +1,9 @@
 @startuml
+'CanInputは"入力を受け付けるか"を司る
+'=> IInputProviderでCanInputを実装することを担保するのは妥当？
+
+'各PresenterがIInputProviderの入力をある程度加工して登録する
+'=> 各PresenterがCanInputを判断する(IObservable.Where())事になる
 class MonoBehaviour { }
 
 package Input {
@@ -6,6 +11,7 @@ package Input {
     }
     
     interface IInputProvider {
+        +canInput : bool
         GetFrontWheelAxis() : IReadonlyReactiveProperty<float>
         GetFrontWheelJump() : IObservable<Unit>
         GetBackWheelAxis() : IReadonlyReactiveProperty<float>
@@ -20,8 +26,11 @@ package PlayerTricycle {
     }
     
     class WheelRotatePresenter <<IInitializable>> {
-        +canInput : bool
         RegisterRotate() : void
+    }
+    
+    class WheelJumpPresenter <<IInitializable>> {
+        RegisterJump() : void
     }
     
     class WheelCalculator {
@@ -35,6 +44,7 @@ package PlayerTricycle {
     
     interface IWheelJumpable {
         Jump(power : float) : void
+        IsGround : bool
     }
     
     class WheelBehaviour {
@@ -54,7 +64,11 @@ package PlayerTricycle {
     
     WheelRotatePresenter ..> IInputProvider
     WheelRotatePresenter ..> TricycleBehaviour
-    WheelRotatePresenter ..left> WheelCalculator
+    WheelRotatePresenter ..> WheelCalculator
+    WheelCalculator ..> TricycleStatus
+    
+    WheelJumpPresenter ..> IInputProvider
+    WheelJumpPresenter ..> TricycleBehaviour
     
     TricycleBehaviour ..> WheelBehaviour
 }
