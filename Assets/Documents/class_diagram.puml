@@ -1,13 +1,17 @@
 @startuml
+class MonoBehaviour { }
 
 package Input {
     class KeyInputProvider {
     }
     
     interface IInputProvider {
-        GetFrontWheel() : ReactiveProperty<float>
-        GetBackWheel() : ReactiveProperty<float>
+        GetFrontWheelAxis() : IReadonlyReactiveProperty<float>
+        GetFrontWheelJump() : IObservable<Unit>
+        GetBackWheelAxis() : IReadonlyReactiveProperty<float>
+        GetRearWheelJump() : IObservable<Unit>
     }
+
     KeyInputProvider ..|> IInputProvider
 }
 package PlayerTricycle {
@@ -29,6 +33,10 @@ package PlayerTricycle {
         Rotate(axis : float) : void
     }
     
+    interface IWheelJumpable {
+        Jump(power : float) : void
+    }
+    
     class WheelBehaviour {
         Rotate(axis : float) : void
     }
@@ -37,23 +45,17 @@ package PlayerTricycle {
         FrontWheel : WheelBehaviour
         RearWheel : WheelRotatable
     }
-
-    class MonoBehaviour { }
     
     TricycleBehaviour --|> MonoBehaviour
     WheelBehaviour --|> MonoBehaviour
 
     WheelBehaviour ..|> IWheelRotatable
+    WheelBehaviour ..|> IWheelJumpable
     
     WheelRotatePresenter ..> IInputProvider
     WheelRotatePresenter ..> TricycleBehaviour
     WheelRotatePresenter ..left> WheelCalculator
     
     TricycleBehaviour ..> WheelBehaviour
-}
-package Game {
-    class RetrySequence {
-    
-    }
 }
 @enduml

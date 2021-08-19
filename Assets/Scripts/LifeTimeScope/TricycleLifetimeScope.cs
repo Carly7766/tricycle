@@ -8,14 +8,15 @@ namespace LifeTimeScope
 {
     public class TricycleLifetimeScope : LifetimeScope
     {
-        [SerializeField] TricycleStatus ttricycleStatus;
+        [SerializeField] TricycleStatus tricycleStatus;
 
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<KeyInputProvider>().As<IInputProvider>();
             builder.RegisterComponentInHierarchy<TricycleBehaviour>();
-            builder.RegisterInstance(ttricycleStatus);
+            builder.RegisterInstance(tricycleStatus);
             builder.RegisterEntryPoint<WheelRotatePresenter>(Lifetime.Scoped);
+            builder.RegisterEntryPoint<WheelJumpPresenter>(Lifetime.Scoped);
         }
     }
 }

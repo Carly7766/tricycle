@@ -5,11 +5,14 @@ namespace Tricycle
 {
     public class TricycleBehaviour : MonoBehaviour
     {
+        [SerializeField] private WheelBehaviour frontWheel;
+        [SerializeField] private WheelBehaviour rearWheel;
+        
         public IWheelRotatable FrontWheelRotatable => frontWheel;
         public IWheelRotatable RearWheelRotatable => rearWheel;
 
-        [SerializeField] private WheelBehaviour frontWheel;
-        [SerializeField] private WheelBehaviour rearWheel;
+        public IWheelJumpable FrontWheelJumpable => frontWheel;
+        public IWheelJumpable RearWheelJumpable => rearWheel;
 
         [SerializeField] private Rigidbody2D test;
         [SerializeField] private Vector3 centerMassPosition = Vector3.zero;

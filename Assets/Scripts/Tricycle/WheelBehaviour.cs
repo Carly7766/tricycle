@@ -2,12 +2,26 @@ using UnityEngine;
 
 namespace Tricycle
 {
-    public class WheelBehaviour : MonoBehaviour, IWheelRotatable
+    public class WheelBehaviour : MonoBehaviour, IWheelRotatable, IWheelJumpable
     {
         private WheelJoint2D _wheelJoint2D;
-        public WheelJoint2D WheelJoint2D => _wheelJoint2D ??= GetComponent<WheelJoint2D>();
+        private WheelJoint2D WheelJoint2D => _wheelJoint2D ??= GetComponent<WheelJoint2D>();
+
+        private Rigidbody2D _rigidbody2D;
+        private Rigidbody2D rigidbody2D => _rigidbody2D ??= GetComponent<Rigidbody2D>();
 
         [SerializeField] private Transform bodyTransform;
+        [SerializeField] private ContactFilter2D filter2d;
+
+        public bool IsGround => rigidbody2D.IsTouching(filter2d);
+
+        void FixedUpdate()
+        {
+            //サスペンションを常に車体と垂直にする
+            var suspension = WheelJoint2D.suspension;
+            suspension.angle = 90f - transform.localEulerAngles.z + bodyTransform.localEulerAngles.z;
+            WheelJoint2D.suspension = suspension;
+        }
 
         public void Rotate(float rotateSpeed)
         {
@@ -16,12 +30,10 @@ namespace Tricycle
             WheelJoint2D.motor = motor;
         }
 
-        void FixedUpdate()
+        public void Jump(float power)
         {
-            //サスペンションを常に車体と垂直にする
-            var suspension = WheelJoint2D.suspension;
-            suspension.angle = 90f - transform.localEulerAngles.z + bodyTransform.localEulerAngles.z;
-            WheelJoint2D.suspension = suspension;
+            Debug.Log(power);
+            rigidbody2D.AddForce(Vector2.up * power);
         }
     }
 }

@@ -13,7 +13,8 @@ namespace Tricycle
         private WheelRotateCalculator _wheelRotateCalculator;
 
         [Inject]
-        public WheelRotatePresenter(IInputProvider inputProvider, TricycleBehaviour tricycleBehaviour, TricycleStatus tricycleStatus)
+        public WheelRotatePresenter(IInputProvider inputProvider, TricycleBehaviour tricycleBehaviour,
+            TricycleStatus tricycleStatus)
         {
             _inputProvider = inputProvider;
             _tricycleBehaviour = tricycleBehaviour;
@@ -22,13 +23,11 @@ namespace Tricycle
 
         public void Initialize()
         {
-            SubscribeInput();
-        }
+            _inputProvider.FrontWheelSpeed.Subscribe(input =>
+                _tricycleBehaviour.FrontWheelRotatable.Rotate(_wheelRotateCalculator.CalculateFrontRotateSpeed(input)));
 
-        public void SubscribeInput()
-        {
-            _inputProvider.FrontWheelSpeed.Subscribe(input => _tricycleBehaviour.FrontWheelRotatable.Rotate(_wheelRotateCalculator.CalculateFrontRotateSpeed(input)));
-            _inputProvider.RearWheelSpeed.Subscribe(input => _tricycleBehaviour.RearWheelRotatable.Rotate(_wheelRotateCalculator.CalculateRearRotateSpeed(input)));
+            _inputProvider.RearWheelSpeed.Subscribe(input =>
+                _tricycleBehaviour.RearWheelRotatable.Rotate(_wheelRotateCalculator.CalculateRearRotateSpeed(input)));
         }
     }
 }

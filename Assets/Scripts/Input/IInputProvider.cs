@@ -1,3 +1,4 @@
+using System;
 using UniRx;
 
 namespace Input
@@ -6,5 +7,7 @@ namespace Input
     {
         IReadOnlyReactiveProperty<float> FrontWheelSpeed { get; }
         IReadOnlyReactiveProperty<float> RearWheelSpeed { get; }
+        IObservable<Unit> GetFrontWheelJump();
+        IObservable<Unit> GetRearWheelJump();
     }
 }
