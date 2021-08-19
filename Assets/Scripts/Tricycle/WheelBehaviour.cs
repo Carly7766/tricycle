@@ -32,7 +32,6 @@ namespace Tricycle
 
         public void Jump(float power)
         {
-            Debug.Log(power);
             rigidbody2D.AddForce(Vector2.up * power);
         }
     }

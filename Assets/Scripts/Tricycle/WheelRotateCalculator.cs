@@ -16,7 +16,7 @@ namespace Tricycle
 
         public float CalculateRearRotateSpeed(float input)
         {
-            return input * _tricycleStatus.frontWheelRotateSpeed;
+            return input * _tricycleStatus.rearWheelRotateSpeed;
         }
     }
 }
