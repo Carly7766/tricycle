@@ -12,12 +12,12 @@ namespace Input
 
         public IObservable<Unit> GetFrontWheelJump()
         {
-            return this.UpdateAsObservable().Where(_ => UnityEngine.Input.GetKeyDown(KeyCode.Alpha0));
+            return this.UpdateAsObservable().Where(_ => UnityEngine.Input.GetButtonDown("FrontJump"));
         }
 
         public IObservable<Unit> GetRearWheelJump()
         {
-            return this.UpdateAsObservable().Where(_ => UnityEngine.Input.GetKeyDown(KeyCode.Alpha2));
+            return this.UpdateAsObservable().Where(_ => UnityEngine.Input.GetButtonDown("RearJump"));
         }
 
         private readonly ReactiveProperty<float> _frontWheelSpeed = new ReactiveProperty<float>();
